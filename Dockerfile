@@ -2,6 +2,12 @@ FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y git
 
+RUN apt-get update && apt-get install -y \
+    zlib1g-dev \
+    libzip-dev \
+    unzip
+RUN docker-php-ext-install zip
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 COPY . /var/www/html
