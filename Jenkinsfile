@@ -27,4 +27,21 @@ pipeline {
 
      }
 
+      post {
+        // Nos permite ejecutar acciones al finalizar el stages. disponibles always, success, failure
+        always {
+            sh 'docker stop app-jenkins'
+            sh 'docker rm app-jenkins'
+        }
+
+        /*success {
+            // Enviamos mensaje al canal #tutorial cuando el build ya terminado sin problemas
+            slackSend(channel: "#tutorial", message: "SUCCESS! test")
+        }
+
+        failure {
+            slackSend(channel: "#tutorial", message: "SUCCESS! test")
+        }*/
+    }
+
 }
